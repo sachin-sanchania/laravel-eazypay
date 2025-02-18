@@ -1,0 +1,33 @@
+{
+    "name": "sachin-sanchania/laravel-eazypay",
+    "description": "Laravel package for ICICI Bank Eazypay payment integration",
+    "keywords": [
+      "laravel", "laravel 10", "icici", "icici payment", "eazypay", "laravel eazypay", "eazypay payment", "eazypay payment api","eazypay payment integration","eazypay payment laravel", "sachin sanchania", "laravel payment integration"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "SachinSanchania\\LaravelEazypay\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sachin Sanchania",
+            "email": "sachin.sanchania@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=7.4.0",
+        "illuminate/support": "*"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SachinSanchania\\LaravelEazypay\\Providers\\EazypayServiceProvider"
+            ]
+        }
+    }
+}
