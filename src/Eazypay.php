@@ -33,10 +33,10 @@ class Eazypay
      * @param string|null $optionalField
      * @return string
      */
-    public function getPaymentUrl($amount, $reference_no, $optionalField=null)
+    public function getPaymentUrl($amount, $reference_no, array $customMandatoryFields = [], $optionalField = null)
     {
         return $this->generatePaymentUrl(
-            $this->getMandatoryField($amount, $reference_no),
+            $this->getMandatoryField($amount, $reference_no, $customMandatoryFields),
             $this->getOptionalField($optionalField),
             $this->getAmount($amount),
             $this->getReferenceNo($reference_no)
@@ -75,9 +75,12 @@ class Eazypay
      * @param string $reference_no
      * @return string
      */
-    protected function getMandatoryField(float $amount, string $reference_no): string
+    protected function getMandatoryField(float $amount, string $reference_no, array $customFields = []): string
     {
-        return $this->encryptValue("{$reference_no}|{$this->sub_merchant_id}|{$amount}");
+        if (empty($customFields)) {
+            $customFields = [$reference_no, $this->sub_merchant_id, $amount];
+        }
+        return $this->encryptValue(implode('|', $customFields));
     }
 
     /**
