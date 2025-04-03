@@ -56,16 +56,21 @@ class Eazypay
     {
         $params = [
             'merchantid' => $this->merchant_id,
-            'mandatory_fields' => $mandatoryField,
-            'optional_fields' => $optionalField ?? '',
+            'mandatory fields' => $mandatoryField,
+            'optional fields' => $optionalField ?? '',
             'returnurl' => $this->getReturnUrl(),
-            'Reference_No' => $reference_no,
+            'Reference No' => $reference_no,
             'submerchantid' => $this->getSubMerchantId(),
-            'transaction_amount' => $amount,
+            'transaction amount' => $amount,
             'paymode' => $this->getPaymode(),
         ];
 
-        return $this->default_base_url . '?' . http_build_query($params);
+        $encodedParams = [];
+        foreach ($params as $key => $value) {
+            $encodedParams[] = rawurlencode($key) . '=' . rawurlencode($value);
+        }
+
+        return $this->default_base_url . '?' . implode('&', $encodedParams);
     }
 
     /**
